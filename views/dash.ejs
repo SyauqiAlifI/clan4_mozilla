@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/output.css">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="https://kit.fontawesome.com/bfcc361c81.js" crossorigin="anonymous"></script>
+    <title>Dashboard - Clan 4</title>
+</head>
+<body>
+  <div class="area">
+    <div class="container">
+      <h1 class="font-bold">Hello, Clan 4 MOZILLA</h1>
+      <% for (const week in media) { %>
+        <section class="section">
+          <h1>Foto & Video di Minggu ke <%= week.replace('week_', '') %></h1>
+          <div class="cust-grid">
+            <% media[week].forEach(item => { %>
+              <% if (item.type === 'image') { %>
+                <a href="<%= item.path %>" class="imgItem item" style="background: url('<%= item.path %>'); background-size: cover; background-position: center; object-fit: cover;">
+                  <!-- <img src="<%= item.path %>" alt="Uploaded Image"> -->
+                  <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1), transparent); color: white;">
+                    <h1><%= item.metadata.title %></h1>
+                    <p><%= item.metadata.description %></p>
+                    <form action="/delete-image" method="POST">
+                      <input type="hidden" name="imagePath" value="<%= item.path %>">
+                      <button type="submit" class="px-4 py-2 bg-red-600 rounded-lg">Delete</button>
+                    </form>
+                  </div>
+                </a>
+              <% } else if (item.type === 'video') { %>
+                <a href="<%= item.path %>" class="videoItem item--large" style="position: relative;">
+                  <video class="w-full h-full object-cover" autoplay muted loop>
+                    <source src="<%= item.path %>" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1), transparent); color: white;">
+                    <h1><%= item.metadata.title %></h1>
+                    <p><%= item.metadata.description %></p>
+                    <form action="/delete-video" method="POST">
+                      <input type="hidden" name="videoPath" value="<%= item.path %>">
+                      <button type="submit" class="px-4 py-2 bg-red-600 rounded-lg">Delete</button>
+                    </form>
+                  </div>
+                </a>
+              <% } %>
+            <% }) %>
+          </div>
+        </section>
+      <% } %>
+      <a href="/upload" id="btn-upload">Click to upload</a>
+      </div>
+    </div>
+  <nav class="main-menu">
+    <ul>
+      <li class="active">
+        <a href="/dash">
+          <i class="fa-solid fa-house-chimney"></i>
+          <span class="nav-text">
+            All week
+          </span>
+        </a>
+      </li>
+      <% for (const week in media) { %>
+        <li>
+          <a href="/dash/week/<%= week.replace('week_', '') %>">
+            <i class="fa-solid fa-circle-chevron-right"></i>
+            <span class="nav-text">
+              Week <%= week.replace('week_', '') %>
+            </span>
+          </a>
+        </li>
+      <% }; %>
+    </ul>
+    <!-- footer nav -->
+    <ul class="homepage-btn">
+      <li>
+        <a href="/">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span class="nav-text">
+            User page
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <script src="scripts/dash.js"></script>
+</body>
+</html>

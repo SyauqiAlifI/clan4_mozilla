@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/home.css">
+  <link rel="stylesheet" href="/stylesheets/output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/bfcc361c81.js" crossorigin="anonymous"></script>
+  <title>Clan 4 Mozilla - Homepage</title>
+</head>
+
+<body>
+  <nav class="main-nav">
+    <div>
+      <a href="#" class="uppercase">
+        Mozilla
+      </a>
+      <div>
+        <ul class="flex flex-row gap-8">
+          <li><a href="#home" class="linkspy">Home</a></li>
+          <li><a href="#about_us" class="linkspy">About</a></li>
+          <% for (const week in media) { %>
+          <li><a href="#<%= week %>" class="linkspy">Week <%= week.replace('week_', '') %></a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Header landing page -->
+  <div id="body-landing">
+    <div id="home">
+      <header id="header-landing">
+        <video autoplay muted loop src="/turntable-opt.mp4"></video> <!-- Video for the background -->
+        <section>
+          <h1>
+            <!-- <span class="text-3xl ">Very Good Very Well</span> -->
+            <span class="font-bold text-8xl">CLAN 4 MOZILLA</span>
+            <span class="font-bold text-3xl text-[--accent]">Paling Good Well</span>
+          </h1>
+          <a aria-hidden="true" href="#read">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+            </svg>
+          </a>
+        </section>
+      </header>
+      <section class="reader" id="read">
+        <div class="content">
+          <!-- <div class="sr-only">
+            With CSS, you can do way more than you think. One of the most fun CSS
+            animation APIs ever. A magical way to create scroll-driven animations
+            without the need to touch JavaScript. Animations run off the main
+            thread. And you can choose to use View Timelines or Scroll Timelines.
+          </div> -->
+          <div data-split aria-hidden="true" class="leading-snug">
+            Clan terbaik yang responsif,
+            Selalu berinovatif,
+            dan Menjelajah hal-hal baru untuk dikuasai.
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div id="body-content" class="">
+    <section id="about_us" class="w-full h-[100vh] container spy m-auto">
+
+    </section>
+    <!-- <hr> -->
+    <% for (const week in media) { %>
+      <section id="<%= week %>" class="body-week min-h-[100vh] spy container m-auto py-8">
+        <h1 class="text-4xl text-center font-bold">Week <%= week.replace('week_', '') %></h1>
+        <p class="text-xl text-center py-8">Foto-foto dan Video-video di Minggu ke <%= week.replace('week_', '') %></p>
+        <div class="cust-grid">
+          <% media[week].forEach(item => { %>
+            <% if (item.type === 'image') { %>
+              <div class="imgItem item" style="background: url('<%= item.path %>'); background-size: cover; background-position: center; object-fit: cover;" onclick="detailImg('<%= item.path %>')">
+                <!-- <img src="<%= item.path %>" alt="Uploaded Image"> -->
+                <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1) 20%, transparent); color: white;">
+                  <h1><%= item.metadata.title %></h1>
+                  <p><%= item.metadata.description %></p>
+                </div>
+              </div>
+              <div id="popup-<%= item.path %>" class="hidden bg-black/30 text-white backdrop-blur-lg shadow-lg rounded-lg flex-col fixed top-0 left-0 z-40 w-full h-full justify-center items-center">
+                <div class="relative w-full h-full">
+                  <div class="bg-neutral-800 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-xl rounded-xl overflow-hidden">
+                    <img src="<%= item.path %>" alt="" class="h-[70vh] w-auto">
+                    <div class="text-white text-center flex gap-4 items-center justify-center p-4">
+                      <h1 class="font-bold uppercase text-3xl"><%= item.metadata.title %></h1>
+                      <span>-</span>
+                      <p class="text-1xl"><%= item.metadata.description %></p>
+                    </div>
+                  </div>
+                  <div class="absolute text-white text-4xl right-14 top-28 drop-shadow-xl cursor-pointer" onclick="detailImg('<%= item.path %>')">
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
+                </div>
+              </div>
+            <% } else if (item.type === 'video') { %>
+              <div class="videoItem item--large" style="position: relative;" onclick="detailImg('<%= item.path %>')">
+                <video class="w-full h-full object-cover" autoplay muted loop>
+                  <source src="<%= item.path %>" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1), transparent); color: white;">
+                  <h1><%= item.metadata.title %></h1>
+                  <p><%= item.metadata.description %></p>
+                </div>
+              </div>
+              <div id="popup-<%= item.path %>" class="hidden bg-black/30 text-white backdrop-blur-lg shadow-lg rounded-lg flex-col fixed top-0 left-0 z-40 w-full h-full justify-center items-center">
+                <div class="relative w-full h-full">
+                  <div class="bg-neutral-800 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-xl rounded-xl overflow-hidden">
+                    <!-- <img src="<%= item.path %>" alt="" class="h-[70vh] w-auto"> -->
+                    <video src="<%= item.path %>" class="h-[70vh]" controls autoplay width="372" height="480"></video>
+                    <div class="text-white text-center flex gap-4 items-center justify-center p-4">
+                      <h1 class="font-bold uppercase text-3xl"><%= item.metadata.title %></h1>
+                      <span>-</span>
+                      <p class="text-1xl"><%= item.metadata.description %></p>
+                    </div>
+                  </div>
+                  <div class="absolute text-white text-4xl right-14 top-28 drop-shadow-xl cursor-pointer" onclick="detailImg('<%= item.path %>')">
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+          <% }) %>
+        </div>
+      </section>
+    <% } %>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    // import gsap from 'https://cdn.skypack.dev/gsap@3.12.0'
+    // import ScrollTrigger from 'https://cdn.skypack.dev/gsap@3.12.0/ScrollTrigger'
+
+    const section = document.querySelector('.reader')
+    const srOnly = document.querySelector('.sr-only')
+    const toSplit = document.querySelector('[data-split]')
+    const content = toSplit.innerText
+    const contentLength = content.length
+
+    const PPC = 10 // Pixels per character...
+    const BUFFER = 40
+    /**
+     * Iterate over the words.
+     * Add them in creating start and finish indexes for them.
+     * */
+    section.style.height = `${
+      PPC * (contentLength + 2) + window.innerHeight + 8 * BUFFER
+    }px`
+
+    document.documentElement.style.setProperty('--buffer', BUFFER)
+    document.documentElement.style.setProperty('--ppc', PPC)
+    document.documentElement.style.setProperty('--pad', 8)
+    document.documentElement.style.setProperty('--content-length', contentLength + 2)
+
+    const words = toSplit.innerText.split(' ')
+    toSplit.innerHTML = ''
+    // toSplit.style.setProperty('--ppc', PPC)
+    let cumulation = 10
+    words.forEach((word, index) => {
+      const text = Object.assign(document.createElement('span'), {
+        innerHTML: `<span>${word} </span>`,
+        style: `
+      --index: ${index};
+      --start: ${cumulation};
+      --end: ${cumulation + word.length};
+    `,
+      })
+      text.dataset.index = index
+      text.dataset.start = cumulation
+      text.dataset.end = cumulation + word.length
+      cumulation += word.length + 1
+      toSplit.appendChild(text)
+    })
+
+    if (!CSS.supports('animation-timeline: scroll()')) {
+      gsap.registerPlugin(ScrollTrigger)
+      console.info('GSAP ScrollTrigger: Registered')
+      // Animate the words
+      for (const word of toSplit.children) {
+        gsap.fromTo(
+          word, {
+            '--active': 0,
+          }, {
+            '--active': 1,
+            ease: 'steps(1)',
+            scrollTrigger: {
+              trigger: '.reader',
+              start: `top top-=${word.dataset.start * PPC}`,
+              end: `top top-=${word.dataset.end * PPC}`,
+              scrub: true,
+            },
+          }
+        )
+      }
+      // Animate the header
+      gsap.to('header', {
+        scale: 0.8,
+        scrollTrigger: {
+          trigger: 'header',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      })
+    }
+  </script>
+  <script>
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 4100) {
+          document.querySelector('nav').classList.add('showed');
+      } else {
+          document.querySelector('nav').classList.remove('showed');
+      }
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.spy');
+      const navLinks = document.querySelectorAll('nav a');
+    
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5 // Trigger when 50% of the section is visible
+      };
+    
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const correspondingLink = document.querySelector(`nav a[href="#${id}"]`);
+          
+          if (entry.isIntersecting) {
+            // Add 'active' class to the corresponding link
+            correspondingLink.classList.add('spy-active');
+          } else {
+            // Remove 'active' class if the section is not in view
+            correspondingLink.classList.remove('spy-active');
+          }
+        });
+      }, observerOptions);
+    
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    });    
+  </script>
+  <script>
+    function detailImg(imgId) {
+      const target = document.getElementById("popup-"+imgId)
+      const body = document.querySelector('body')
+      body.classList.toggle('overflow-hidden')
+      target.classList.toggle("hidden")
+      target.classList.toggle("flex")
+    }
+  </script>
+  <script src="scripts/dash.js"></script>
+</body>
+
+</html>

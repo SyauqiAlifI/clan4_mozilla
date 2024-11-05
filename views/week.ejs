@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/output.css">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="https://kit.fontawesome.com/bfcc361c81.js" crossorigin="anonymous"></script>
+    <title>Minggu ke <%= weekParam %> - Clan 4</title>
+</head>
+<body>
+  <div class="area">
+    <div class="container">
+      <h1 class="font-bold">Hello, Clan 4 MOZILLA</h1>
+      <section class="section">
+        <h1>Foto & Video di Minggu ke <%= weekParam.replace('week_', '') %></h1>
+        <div class="cust-grid">
+          <% media.forEach(item => { %>
+            <% if (item.type === 'image') { %>
+              <a href="/uploads/<%= weekParam %>/<%= item.fileName %>" class="imgItem item" style="background: url('/uploads/<%= weekParam %>/<%= item.fileName %>'); background-size: cover; background-position: center; object-fit: cover;">
+                <div class="item__details">
+                  <h1><%= item.metadata.title %></h1>
+                  <p><%= item.metadata.description %></p>
+                </div>
+              </a>
+            <% } else if (item.type === 'video') { %>
+              <video class="item" controls>
+                <source src="/videos/<%= weekParam %>/<%= item.fileName %>" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="item__details">
+                <h1><%= item.metadata.title %></h1>
+                <p><%= item.metadata.description %></p>
+              </div>
+            <% } %>
+          <% }) %>
+        </div>
+      </section>
+      <!-- <a href="/upload" id="btn-upload">Click to upload</a> -->
+      </div>
+    </div>
+  <script src="/scripts/dash.js"></script>
+</body>
+</html>

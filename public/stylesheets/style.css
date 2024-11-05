@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Variables */
+@layer base {
+  .hlanding::before {
+    --size: 60px,
+  }
+}
+
+/* Custom styles */
+* {
+  @apply m-0 p-0 scroll-smooth overscroll-none font-[Poppins]
+}
+
+::-webkit-scrollbar {
+  @apply w-2
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent backdrop-blur-sm
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-red-500 rounded-full
+}
+
+body {
+  @apply min-w-full min-h-[100vh]
+}
+
+body::before {
+  @apply content-[''] h-screen w-screen fixed top-0 bg-cover bg-center bg-[url('/lines-abstract.svg')] opacity-20 -z-[1]
+}
+
+.area {
+  @apply float-left bg-gray-200 h-full w-full pl-40 pr-20;
+}
+
+.main-menu {
+  @apply fixed z-[1000] top-0 bottom-0 left-0 scale-100 w-[65px] bg-gray-800 border-r border-gray-300 overflow-hidden transition-all duration-[.05s];
+}
+
+.main-menu:hover,
+nav.main-menu.expanded {
+  @apply w-fit overflow-visible transition-all;
+}
+
+/* .main-menu > ul {
+  @apply mx-[10px];
+} */
+
+.main-menu li {
+  @apply relative block w-[250px];
+}
+
+.main-menu li > a {
+  @apply relative flex items-center justify-center text-gray-500 hover:text-white transition-all py-2;
+}
+
+.main-menu .nav-icon {
+  @apply relative flex items-center justify-center w-[60px] h-[36px] text-[18px];
+}
+
+.main-menu .nav-text {
+  @apply relative flex items-center justify-center w-[190px] font-sans;
+}
+
+.main-menu > ul.homepage-btn {
+  @apply absolute left-0 bottom-0;
+}
+
+.no-touch .scrollable.hover {
+  @apply overflow-y-hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+  @apply overflow-y-auto overflow-visible;
+}
+
+a:hover,
+a:focus {
+  @apply no-underline;
+}
+
+nav {
+  @apply select-none;
+}
+
+nav ul,
+nav li {
+  @apply outline-none m-0 p-0;
+}
+
+.main-menu li:hover,
+nav.main-menu li.active > a,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
+.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
+.dashboard-page nav.dashboard-menu ul li.active a {
+  @apply text-white bg-black;
+}
+
+/* the body area */
+
+/* #area-body */
+.area-body {
+  @apply flex justify-center items-center relative w-full h-full bg-gray-200 text-sm font-mono;
+}
+
+/* @supports (display: grid) */
+/* No need to use @supports in Tailwind CSS, as it's already handled internally */
+
+/* .section */
+.section {
+  @apply block py-8;
+}
+
+/* .grid */
+.cust-grid {
+  @apply grid gap-6 grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] auto-rows-[250px] grid-flow-row-dense;
+}
+
+/* h1 */
+.item__details h1 {
+  @apply text-2xl uppercase font-bold;
+}
+
+/* .item */
+.item {
+  @apply box-border relative flex flex-col justify-end w-full h-full bg-teal-800 text-white col-start-auto row-start-auto shadow-md transition-transform duration-300 ease-in-out cursor-pointer;
+}
+
+/* Same styles applied to video items */
+.videoItem {
+  @apply box-border relative flex flex-col justify-end w-full h-full bg-teal-800 text-white col-start-auto row-start-auto shadow-md transition-transform duration-300 ease-in-out cursor-pointer;
+}
+
+.videoItem video {
+  @apply block absolute inset-0 max-w-full max-h-full object-cover;
+}
+
+.videoItem:hover {
+  @apply scale-[1.05];
+}
+
+.videoItem:hover:after {
+  @apply opacity-0;
+}
+
+/* .item:after */
+.item:after {
+  @apply absolute inset-0 bg-black opacity-30 transition-opacity duration-300 ease-in-out;
+}
+
+/* .item:hover */
+.item:hover {
+  @apply scale-[1.05];
+}
+
+/* .item:hover:after */
+.item:hover:after {
+  @apply opacity-0;
+}
+
+/* .item--medium */
+.item--medium {
+  @apply row-end-[span_2];
+}
+
+/* .item--large */
+.item--large {
+  @apply row-end-[span_2];
+}
+
+/* .item--full */
+.item--full {
+  @apply col-end-auto md:col-[1/-1] md:row-end-[span_2];
+}
+
+/* .item__details */
+.item__details {
+  @apply relative z-10 p-4 text-gray-600 bg-transparent lowercase tracking-wider w-full;
+}
+
+/* nav for user page */
+.main-nav {
+  @apply -translate-y-[100%] fixed w-full bg-gradient-to-b from-neutral-900 from-50% transition-all duration-500 z-50;
+}
+
+.main-nav > div {
+  @apply flex w-full justify-between px-20 py-8;
+}
+
+.main-nav a {
+  @apply relative text-center py-3;
+}
+
+.main-nav a.linkspy::before {
+  @apply content-[''] absolute w-[50%] h-1 rounded-xl bottom-[50%] left-1/2 -translate-x-1/2 bg-transparent transition-all duration-300
+}
+
+.main-nav a.linkspy.spy-active::before, .main-nav a:hover::before {
+  @apply bg-neutral-200 bottom-0;
+}
+
+.showed {
+  @apply translate-y-0 transition-all duration-500;
+}

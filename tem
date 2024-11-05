@@ -1,0 +1,48 @@
+    
+    <% for (const week in media) { %>
+      <section id="<%= week %>" class="body-week min-h-[100vh] spy md:py-16">
+        <div class="container p-auto m-auto">
+          <h1 class="text-white text-2xl">Week <%= week.replace('week_', '') %></h1>
+          <p><span>Our Videos and Photos in this week</span></p>
+          <div class="media-gallery">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              <% media[week].forEach(item => { %>
+                <% if (item.type === 'image') { %>
+                  <div class="imgItem item" style="background: url('<%= item.path %>'); background-size: cover; background-position: center; object-fit: cover;" onclick="detailImg('<%= item.path %>')">
+                    <!-- <img src="<%= item.path %>" alt="Uploaded Image"> -->
+                    <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1), transparent); color: white;">
+                      <h1><%= item.metadata.description %></h1>
+                      <p><%= item.metadata.title %></p>
+                    </div>
+                  </div>
+                <% } else if (item.type === 'video') { %>
+                  <div class="relative rounded-md overflow-hidden cursor-pointer hover:-translate-y-2 hover:shadow-lg transition-all hover:shadow-white" onclick="detailImg('<%= item.path %>')">
+                    <video src="<%= item.path %>" class="h-full" autoplay muted></video>
+                    <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1), transparent); color: white;">
+                      <h1><%= item.metadata.description %></h1>
+                      <p><%= item.metadata.title %></p>
+                    </div>
+                  </div>
+                  <div id="popup-<%= item.path %>" class="hidden bg-black/30 text-white backdrop-blur-lg shadow-lg rounded-lg flex-col fixed top-0 left-0 z-40 w-full h-full justify-center items-center">
+                    <div class="relative w-full h-full">
+                      <div class="bg-neutral-800 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-xl rounded-xl overflow-hidden">
+                        <!-- <img src="<%= item.path %>" alt="" class="h-[70vh] w-auto"> -->
+                        <video src="<%= item.path %>" class="h-[70vh]" controls autoplay width="372" height="480"></video>
+                        <div class="text-white text-center flex gap-4 items-center justify-center p-4">
+                          <h1 class="font-bold uppercase text-3xl"><%= item.metadata.description %></h1>
+                          <span>-</span>
+                          <p class="text-1xl"><%= item.metadata.title %></p>
+                        </div>
+                      </div>
+                      <div class="absolute text-white text-4xl right-14 top-28 drop-shadow-xl cursor-pointer" onclick="detailImg('<%= item.path %>')">
+                        <i class="fa-solid fa-xmark"></i>
+                      </div>
+                    </div>
+                  </div>
+                <% } %>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      </section>
+      <% } %>

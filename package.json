@@ -1,0 +1,30 @@
+{
+  "name": "web-clan-4-mozilla-new",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "watch": "node app.js --watch",
+    "dev": "nodemon app.js",
+    "style": "npx tailwindcss -i ./public/stylesheets/style.css -o ./public/stylesheets/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "multer": "^1.4.5-lts.1",
+    "postcss-cli": "^11.0.0",
+    "preline": "^2.5.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "nodemon": "^3.1.7",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13"
+  }
+}

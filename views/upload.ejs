@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Upload Files</title>
+</head>
+
+<body>
+  <!-- <h1>Upload Images</h1>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <label for="week">Foto minggu ke:</label>
+    <input type="text" name="week" placeholder="Minggu" required>
+    <label for="title">Title:</label>
+    <input type="text" name="title" placeholder="Title" required>
+    <label for="description">Description:</label>
+    <textarea name="description" placeholder="Description" required></textarea>
+    <input type="file" name="images" multiple required>
+    <button type="submit">Upload Images</button>
+  </form> -->
+  <h1>Upload Images</h1>
+  <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+    <label for="week">Foto minggu ke:</label>
+    <input type="number" name="week" placeholder="Minggu" required>
+    <div id="filesContainer">
+      <div class="file-entry">
+        <label for="title">Title:</label>
+        <input type="text" name="title[]" placeholder="Title" required>
+        <label for="description">Description:</label>
+        <textarea name="description[]" placeholder="Description" required></textarea>
+        <input type="file" name="images" required>
+      </div>
+    </div>
+    <button type="button" id="addFileBtn">Add More Files</button>
+    <button type="submit">Upload Images</button>
+  </form>
+
+  <h1>Upload Videos</h1>
+  <form id="uploadVidForm" action="/upload-video" method="POST" enctype="multipart/form-data">
+    <label for="week">Video minggu ke:</label>
+    <input type="number" name="week" placeholder="Minggu" required>
+    <div id="filesVidContainer">
+      <div class="file-vid-entry">
+        <label for="title">Title:</label>
+        <input type="text" name="title[]" placeholder="Title" required>
+        <label for="description">Description:</label>
+        <textarea name="description[]" placeholder="Description" required></textarea>
+        <input type="file" name="videos" required>
+      </div>
+    </div>
+    <button type="button" id="addVidFileBtn">Add More Files</button>
+    <button type="submit">Upload Videos</button>
+  </form>
+
+  <a href="/">
+    <- kembali 
+  </a> 
+  <script>
+    document.getElementById('addFileBtn').addEventListener('click', function() {
+      const container = document.getElementById('filesContainer');
+      const newEntry = document.createElement('div');
+      newEntry.classList.add('file-entry');
+      newEntry.innerHTML = `
+      <label for="title">Title:</label>
+      <input type="text" name="title[]" placeholder="Title" required>
+      <label for="description">Description:</label>
+      <textarea name="description[]" placeholder="Description" required></textarea>
+      <input type="file" name="images" required>
+      <button type="button" class="removeFileBtn">Remove</button>
+      `;
+      container.appendChild(newEntry);
+    });
+    // Event delegation for removing file entries
+    document.getElementById('filesContainer').addEventListener('click', function(e) {
+      if (e.target.classList.contains('removeFileBtn')) {
+          const fileEntry = e.target.parentElement; // Get the parent file-entry div
+          fileEntry.remove(); // Remove the file entry
+      }
+    });
+    document.getElementById('addVidFileBtn').addEventListener('click', function() {
+      const container = document.getElementById('filesVidContainer');
+      const newEntry = document.createElement('div');
+      newEntry.classList.add('file-vid-entry');
+      newEntry.innerHTML = `
+      <label for="title">Title:</label>
+      <input type="text" name="title[]" placeholder="Title" required>
+      <label for="description">Description:</label>
+      <textarea name="description[]" placeholder="Description" required></textarea>
+      <input type="file" name="videos" required>
+      <button type="button" class="removeFileVidBtn">Remove</button>
+      `;
+      container.appendChild(newEntry);
+    });
+    // Event delegation for removing file entries
+    document.getElementById('filesVidContainer').addEventListener('click', function(e) {
+      if (e.target.classList.contains('removeFileVidBtn')) {
+          const fileEntry = e.target.parentElement; // Get the parent file-entry div
+          fileEntry.remove(); // Remove the file entry
+      }
+    });
+  </script>
+</body>
+
+</html>

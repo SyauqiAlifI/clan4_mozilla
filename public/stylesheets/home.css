@@ -8,7 +8,7 @@
 	--font-size: clamp(2rem, 8vmin + 1rem, 4rem);
 	--line: color-mix(in lch, canvasText 15%, transparent);
 	--base: 0.4;
-	--accent: hsl(8 100% 55%);
+	--accent: #00b61b;
 	--header-height: 100vh;
 	--overlay: color-mix(in lch, canvas 70%, transparent);
 	color-scheme: dark only;

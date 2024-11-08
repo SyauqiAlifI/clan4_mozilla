@@ -5,7 +5,11 @@ module.exports = {
     'node_modules/preline/dist/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'primary': '#02cc20',
+      }
+    },
   },
   plugins: [
     require('preline/plugin'),

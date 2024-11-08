@@ -64,6 +64,62 @@ app.get('/', (req, res) => {
   const uploadWeeks = fs.readdirSync('./uploads').filter(file => fs.lstatSync(`./uploads/${file}`).isDirectory());
   const videoWeeks = fs.readdirSync('./videos').filter(file => fs.lstatSync(`./videos/${file}`).isDirectory());
   const weeks = [...new Set([...uploadWeeks, ...videoWeeks])]; // Combine and deduplicate weeks
+  const teams = [
+    {
+      img: "teams/Alya.jpg",
+      name: "Alya Inasthiya",
+      sick: "Maag",
+      quote: "jangan takut salah, kan ada tipe-x"
+    },
+    {
+      img: "teams/Laela.jpg",
+      name: "Laela Rahmawati",
+      sick: "Maag",
+      quote: "tidak ada proses yang mudah untuk hasil yang indah"
+    },
+    {
+      img: "teams/Liza.jpg",
+      name: "Yuniar khauliza",
+      sick: "Maag",
+      quote: "Berani melangkah adalah langkah awal menuju kesuksesaan"
+    },
+    {
+      img: "teams/Hera.jpg",
+      name: "Khaera Mir'ah Andina",
+      sick: "Sakit Gigi",
+      quote: "dont say to Allah if you have problem but say to problem if you have Allah"
+    },
+    {
+      img: "teams/Wanda.jpg",
+      name: "Wanda Oktiva",
+      sick: "Maag",
+      quote: "Tidak ada istilah gagal dalam hidup, yang ada hanya sukses yang belum tercapai."
+    },
+    {
+      img: "teams/Ghaza.jpg",
+      name: "Muhammad Ghazali Arfinsyah",
+      sick: "Maag",
+      quote: "Jika kamu tidak sanggup menahan lelahnya belajar maka kamu harus sanggup menahan perihnya kebodohan"
+    },
+    {
+      img: "teams/Alif.jpg",
+      name: "Syauqi Alif Ibrahim",
+      sick: "Flu",
+      quote: "Kesabaran adalah salah satu kunci kesuksesan"
+    },
+    {
+      img: "teams/Fadel.jpg",
+      name: "Muhammad Fadil Zulkifly",
+      sick: "Maag",
+      quote: "Ketika kamu ingin menyerah, ingatlah alasan kenapa kamu memulai."
+    },
+    {
+      img: "teams/Arkam.jpg",
+      name: "Muhammad Arkam",
+      sick: "Maag",
+      quote: "Setiap langkah kecil yg Kmu ambil saat ini akan membawa mu lebih dekat dgn tujuan mu.jadi jangan pernah berhenti melangkah maju"
+    }
+  ];
 
   const media = {};
 
@@ -90,7 +146,7 @@ app.get('/', (req, res) => {
   });
 
   res.render('index', {
-    media
+    media, teams
   });
 });
 

@@ -1,48 +1,85 @@
-    
-    <% for (const week in media) { %>
-      <section id="<%= week %>" class="body-week min-h-[100vh] spy md:py-16">
-        <div class="container p-auto m-auto">
-          <h1 class="text-white text-2xl">Week <%= week.replace('week_', '') %></h1>
-          <p><span>Our Videos and Photos in this week</span></p>
-          <div class="media-gallery">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              <% media[week].forEach(item => { %>
-                <% if (item.type === 'image') { %>
-                  <div class="imgItem item" style="background: url('<%= item.path %>'); background-size: cover; background-position: center; object-fit: cover;" onclick="detailImg('<%= item.path %>')">
-                    <!-- <img src="<%= item.path %>" alt="Uploaded Image"> -->
-                    <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1), transparent); color: white;">
-                      <h1><%= item.metadata.description %></h1>
-                      <p><%= item.metadata.title %></p>
-                    </div>
-                  </div>
-                <% } else if (item.type === 'video') { %>
-                  <div class="relative rounded-md overflow-hidden cursor-pointer hover:-translate-y-2 hover:shadow-lg transition-all hover:shadow-white" onclick="detailImg('<%= item.path %>')">
-                    <video src="<%= item.path %>" class="h-full" autoplay muted></video>
-                    <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1), transparent); color: white;">
-                      <h1><%= item.metadata.description %></h1>
-                      <p><%= item.metadata.title %></p>
-                    </div>
-                  </div>
-                  <div id="popup-<%= item.path %>" class="hidden bg-black/30 text-white backdrop-blur-lg shadow-lg rounded-lg flex-col fixed top-0 left-0 z-40 w-full h-full justify-center items-center">
-                    <div class="relative w-full h-full">
-                      <div class="bg-neutral-800 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-xl rounded-xl overflow-hidden">
-                        <!-- <img src="<%= item.path %>" alt="" class="h-[70vh] w-auto"> -->
-                        <video src="<%= item.path %>" class="h-[70vh]" controls autoplay width="372" height="480"></video>
-                        <div class="text-white text-center flex gap-4 items-center justify-center p-4">
-                          <h1 class="font-bold uppercase text-3xl"><%= item.metadata.description %></h1>
-                          <span>-</span>
-                          <p class="text-1xl"><%= item.metadata.title %></p>
-                        </div>
-                      </div>
-                      <div class="absolute text-white text-4xl right-14 top-28 drop-shadow-xl cursor-pointer" onclick="detailImg('<%= item.path %>')">
-                        <i class="fa-solid fa-xmark"></i>
-                      </div>
-                    </div>
-                  </div>
-                <% } %>
-              <% }) %>
-            </div>
-          </div>
-        </div>
-      </section>
-      <% } %>
+<!--Waves Container-->
+<div>
+  <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+    <g class="parallax">
+      <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+      <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+      <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+      <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+    </g>
+  </svg>
+</div>
+<!--Content starts-->
+<div class="foot-content flex">
+  <p>By.Goodkatz | Free to use </p>
+</div>
+<!--Content ends-->
+<style>
+  .waves {
+    position: relative;
+    width: 100%;
+    height: 15vh;
+    margin-bottom: -7px;
+    /*Fix for safari gap*/
+    min-height: 100px;
+    max-height: 150px;
+  }
+
+  .foot-content {
+    position: relative;
+    height: 20vh;
+    text-align: center;
+    background-color: white;
+  }
+
+  /* Animation */
+
+  .parallax>use {
+    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+  }
+
+  .parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+  }
+
+  .parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+  }
+
+  .parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+  }
+
+  .parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+  }
+
+  @keyframes move-forever {
+    0% {
+      transform: translate3d(-90px, 0, 0);
+    }
+
+    100% {
+      transform: translate3d(85px, 0, 0);
+    }
+  }
+
+  /*Shrinking for mobile*/
+  @media (max-width: 768px) {
+    .waves {
+      height: 40px;
+      min-height: 40px;
+    }
+
+    .foot-content {
+      height: 30vh;
+    }
+  }
+</style>

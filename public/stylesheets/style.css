@@ -27,15 +27,11 @@
 }
 
 body {
-  @apply min-w-full min-h-[100vh]
+  @apply min-w-full min-h-[100vh] bg-black/90
 }
 
 body::before {
   @apply content-[''] h-screen w-screen fixed top-0 bg-cover bg-center bg-[url('/lines-abstract.svg')] opacity-20 -z-[1]
-}
-
-.area {
-  @apply float-left bg-gray-200 h-full w-full pl-40 pr-20;
 }
 
 .main-menu {
@@ -112,6 +108,10 @@ nav.main-menu li.active > a,
   @apply flex justify-center items-center relative w-full h-full bg-gray-200 text-sm font-mono;
 }
 
+.body-content {
+  @apply w-[90vw] mx-auto sm:w-full
+}
+
 /* @supports (display: grid) */
 /* No need to use @supports in Tailwind CSS, as it's already handled internally */
 
@@ -122,7 +122,7 @@ nav.main-menu li.active > a,
 
 /* .grid */
 .cust-grid {
-  @apply grid gap-6 grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] auto-rows-[250px] grid-flow-row-dense;
+  @apply grid gap-2 sm:gap-6 grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] auto-rows-[80px] sm:grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] sm:auto-rows-[150px] md:grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] md:auto-rows-[250px] grid-flow-row-dense;
 }
 
 /* h1 */
@@ -189,7 +189,11 @@ nav.main-menu li.active > a,
 
 /* nav for user page */
 .main-nav {
-  @apply -translate-y-[100%] fixed w-full bg-gradient-to-b from-neutral-900 from-50% transition-all duration-500 z-50;
+  @apply -translate-y-[100%] fixed w-full bg-gradient-to-b from-neutral-900 from-50% transition-all duration-500 z-50 text-white;
+}
+
+.main-nav #lists-nav {
+  
 }
 
 .main-nav #lists-nav > ul {

@@ -4,19 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/output.css">
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/bfcc361c81.js" crossorigin="anonymous"></script>
-    <title>Minggu ke <%= weekParam %> - Clan 4</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <title>Minggu ke <%= weekParam.replace('week_', '') %> - Clan 4</title>
 </head>
-<body>
-  <div class="area">
-    <div class="container">
+<body class="m-auto">
+  <nav class="main-nav" style="transform: translateY(0);">
+    <div class="text-white">
+      <a href="#" class="uppercase">
+        Mozilla
+      </a>
+      <div id="lists-nav">
+        <ul class="flex flex-row gap-8 font-bold">
+          <li><a href="#home" class="linkspy">Home</a></li>
+          <li><a href="#aboutus" class="linkspy">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="body-content">
+    <div class="container mx-auto">
       <h1 class="font-bold">Hello, Clan 4 MOZILLA</h1>
       <section class="section">
         <h1>Foto & Video di Minggu ke <%= weekParam.replace('week_', '') %></h1>
         <div class="cust-grid">
           <% media.forEach(item => { %>
-            <% if (item.type === 'image') { %>
+            <!-- <% if (item.type === 'image') { %>
               <a href="/uploads/<%= weekParam %>/<%= item.fileName %>" class="imgItem item" style="background: url('/uploads/<%= weekParam %>/<%= item.fileName %>'); background-size: cover; background-position: center; object-fit: cover;">
                 <div class="item__details">
                   <h1><%= item.metadata.title %></h1>
@@ -32,6 +49,41 @@
                 <h1><%= item.metadata.title %></h1>
                 <p><%= item.metadata.description %></p>
               </div>
+            <% } %> -->
+            <% if (item.type === 'image') { %>
+              <div class="imgItem item" style="background: url('/uploads/<%= weekParam %>/<%= item.fileName %>'); background-size: cover; background-position: center; object-fit: cover;" onclick="detailImg('<%= item.fileName %>')">
+              </div>
+              <div id="popup-<%= item.fileName %>" class="popups hidden bg-black/30 text-white backdrop-blur-lg shadow-lg rounded-lg flex-col fixed top-0 left-0 z-40 w-full h-full justify-center items-center">
+                <div class="relative w-full h-full">
+                  <div class="bg-neutral-800 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-xl rounded-xl overflow-hidden">
+                    <img src="/uploads/<%= weekParam %>/<%= item.fileName %>" alt="" class="h-[70vh] w-auto object-cover bg-center">
+                  </div>
+                  <div class="absolute text-white text-4xl right-14 top-28 bg-black/35 cursor-pointer" onclick="detailImg('<%= item.fileName %>')">
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
+                </div>
+              </div>
+            <% } else if (item.type === 'video') { %>
+              <div class="videoItem item--large" style="position: relative;" onclick="detailImg('<%= item.fileName %>')">
+                <video class="w-full h-full object-cover" autoplay muted loop>
+                  <source src="/videos/<%= weekParam %>/<%= item.fileName %>" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <!-- <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1), transparent); color: white;">
+                  <h1><%= item.metadata.title %></h1>
+                  <p><%= item.metadata.description %></p>
+                </div> -->
+              </div>
+              <div id="popup-<%= item.fileName %>" class="popups hidden bg-black/30 text-white backdrop-blur-lg shadow-lg rounded-lg flex-col fixed top-0 left-0 z-40 w-full h-full justify-center items-center">
+                <div class="relative w-full h-full">
+                  <div class="bg-neutral-800 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-xl rounded-xl overflow-hidden">
+                    <video src="<%= item.fileName %>" class="h-[70vh]" controls autoplay width="372" height="480"></video>
+                  </div>
+                  <div class="absolute text-white text-4xl right-14 top-28 drop-shadow-xl cursor-pointer" onclick="detailImg('<%= item.path %>')">
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
+                </div>
+              </div>
             <% } %>
           <% }) %>
         </div>
@@ -40,5 +92,36 @@
       </div>
     </div>
   <script src="/scripts/dash.js"></script>
+  <script>
+    const targetAll = document.querySelectorAll(".popups")
+    function detailImg(imgId) {
+      const target = document.getElementById("popup-"+imgId)
+      const body = document.querySelector('body')
+      body.classList.toggle('overflow-hidden')
+      target.classList.toggle("hidden")
+      target.classList.toggle("flex")
+    }
+    function closePopup() {
+      const target = document.querySelectorAll('.popups')
+      const body = document.querySelector('body')
+      for (let i = 0; i < target.length; i++) {
+        if (target[i].classList.contains('flex')) {
+          target[i].classList.remove('flex')
+          target[i].classList.add('hidden')
+        }
+      }
+      body.classList.remove('overflow-hidden')
+    }
+    window.addEventListener('click', function(event) {
+      if (event.target.classList.contains('popups')) {
+        closePopup()
+      }
+    });
+    window.addEventListener('keydown', function(event){
+      if (event.key === "Escape") {
+        closePopup()
+      }
+    })
+  </script>
 </body>
 </html>

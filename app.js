@@ -317,11 +317,11 @@ const videoStorage = multer.diskStorage({
 
 const videoUpload = multer({
   storage: videoStorage
-}).array('videos', 10);
+}).array('videos', 20);
 
 const upload = multer({
   storage: storage
-}).array('images', 10);
+}).array('images', 20);
 
 app.post('/upload', upload, (req, res) => {
   if (!req.files) {

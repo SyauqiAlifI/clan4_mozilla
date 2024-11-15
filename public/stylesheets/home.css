@@ -114,7 +114,8 @@ header#header-landing > section {
 	width: 100%;
 	translate: 0 -100%;
 	display: grid;
-	place-items: center;
+	align-items: end;
+	/* place-items: center; */
 	background: var(--overlay);
 }
 

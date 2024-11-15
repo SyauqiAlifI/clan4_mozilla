@@ -25,7 +25,7 @@
           <li><a href="#home" class="linkspy">Home</a></li>
           <li><a href="#aboutus" class="linkspy">About</a></li>
           <% for (const week in media) { %>
-          <li><a href="#<%= week %>" class="linkspy">Week <%= week.replace('week_', '') %></a></li>
+          <li><a href="#spy-<%= week %>" class="linkspy">Week <%= week.replace('week_', '') %></a></li>
           <% } %>
         </ul>
       </div>
@@ -35,9 +35,9 @@
   <div id="body-landing">
     <div id="home">
       <header id="header-landing">
-        <video autoplay muted loop src="/turntable-opt.mp4"></video> <!-- Video for the background -->
+        <video autoplay muted loop src="/Opening CLan 4.mp4"></video> <!-- Video for the background -->
         <section>
-          <h1>
+          <h1 class="absolute top-[8%] left-1/2 -translate-x-1/2 w-full">
             <!-- <span class="text-3xl ">Very Good Very Well</span> -->
             <span class="font-bold text-8xl">CLAN 4 MOZILLA</span>
             <span class="font-bold text-3xl text-primary">Paling Good Well</span>
@@ -66,7 +66,7 @@
       </section>
     </div>
   </div>
-  <div id="body-content" class="">
+  <div id="body-content" class="body-content">
     <section id="aboutus" class="w-full h-full spy m-auto bg-neutral-900 py-8">
       <div class="w-full container mx-auto px-4 md:px-8">
         <div class="w-fit text-center m-auto">
@@ -80,19 +80,19 @@
           </p>
         </div>
         <div class="mt-12">
-          <ul class="grid gap-8 lg:grid-cols-3">
+          <ul class="grid gap-8 grid-cols-2 lg:grid-cols-3">
             <% teams.forEach(member => { %>
               <div data-aos="fade-up" data-aos-duration="1000" class="flex flex-col bg-white/10 shadow-sm shadow-white/30 rounded-xl hover:shadow-white/50 hover:shadow-lg transition" href="#">
                 <img class="w-full max-h-[400px] object-cover rounded-t-xl" src="<%= member.img %>" alt="Card Image">
                 <div class="p-4 md:p-5">
-                  <h3 class="text-xl font-bold text-gray-800 dark:text-white">
+                  <h3 class="text-sm sm:text-xl font-bold text-gray-800 dark:text-white">
                     <%= member.name %>
                   </h3>
                   <div class="w-1/4 h-[1px] bg-white my-2"></div>
-                  <p class="mt-1 text-white">
+                  <p class="mt-1 hidden sm:block text-white">
                     "<%= member.quote %>"
                   </p>
-                  <p class="mt-1 text-white/50">
+                  <p class="mt-1 hidden sm:block text-white/50">
                     <%= member.sick %>
                   </p>
                 </div>
@@ -105,7 +105,7 @@
     <div class="bg-gradient-to-b from-neutral-900 to-transparent h-16"></div>
     <!-- <hr> -->
     <% for (const week in media) { %>
-      <section id="<%= week %>" class="body-week min-h-[100vh] spy container m-auto py-8">
+      <section id="spy-<%= week %>" class="body-week max-h-[100vh] overflow-hidden spy container m-auto py-8 md:py-12 relative rounded-b-xl transition-all">
         <h1 class="text-4xl text-center font-bold">Week <%= week.replace('week_', '') %></h1>
         <p class="text-xl text-center py-8">Foto-foto dan Video-video yang telah kami<br>unggah di Minggu ke <%= week.replace('week_', '') %></p>
         <div class="cust-grid">
@@ -113,20 +113,20 @@
             <% if (item.type === 'image') { %>
               <div class="imgItem item" style="background: url('<%= item.path %>'); background-size: cover; background-position: center; object-fit: cover;" onclick="detailImg('<%= item.path %>')">
                 <!-- <img src="<%= item.path %>" alt="Uploaded Image"> -->
-                <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1) 20%, transparent); color: white;">
+                <!-- <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1) 20%, transparent); color: white;">
                   <h1><%= item.metadata.title %></h1>
                   <p><%= item.metadata.description %></p>
-                </div>
+                </div> -->
               </div>
-              <div id="popup-<%= item.path %>" class="hidden bg-black/30 text-white backdrop-blur-lg shadow-lg rounded-lg flex-col fixed top-0 left-0 z-40 w-full h-full justify-center items-center">
+              <div id="popup-<%= item.path %>" class="popups hidden bg-black/30 text-white backdrop-blur-lg shadow-lg rounded-lg flex-col fixed top-0 left-0 z-40 w-full h-full justify-center items-center">
                 <div class="relative w-full h-full">
                   <div class="bg-neutral-800 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-xl rounded-xl overflow-hidden">
-                    <img src="<%= item.path %>" alt="" class="h-[70vh] w-auto object-cover">
-                    <div class="text-white text-center flex gap-4 items-center justify-center p-4">
+                    <img src="<%= item.path %>" alt="" class="h-[70vh] w-auto object-cover bg-center">
+                    <!-- <div class="text-white text-center flex gap-4 items-center justify-center p-4">
                       <h1 class="font-bold uppercase text-3xl"><%= item.metadata.title %></h1>
                       <span>-</span>
                       <p class="text-1xl"><%= item.metadata.description %></p>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="absolute text-white text-4xl right-14 top-28 bg-black/35 cursor-pointer" onclick="detailImg('<%= item.path %>')">
                     <i class="fa-solid fa-xmark"></i>
@@ -139,21 +139,12 @@
                   <source src="<%= item.path %>" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
-                <div class="item__details" style="position: absolute; bottom: 0; background-image: linear-gradient(to top, rgba(0, 0, 0, 1), transparent); color: white;">
-                  <h1><%= item.metadata.title %></h1>
-                  <p><%= item.metadata.description %></p>
-                </div>
               </div>
-              <div id="popup-<%= item.path %>" class="hidden bg-black/30 text-white backdrop-blur-lg shadow-lg rounded-lg flex-col fixed top-0 left-0 z-40 w-full h-full justify-center items-center">
+              <div id="popup-<%= item.path %>" class="popups hidden bg-black/30 text-white backdrop-blur-lg shadow-lg rounded-lg flex-col fixed top-0 left-0 z-40 w-full h-full justify-center items-center">
                 <div class="relative w-full h-full">
                   <div class="bg-neutral-800 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-xl rounded-xl overflow-hidden">
                     <!-- <img src="<%= item.path %>" alt="" class="h-[70vh] w-auto"> -->
                     <video src="<%= item.path %>" class="h-[70vh]" controls autoplay width="372" height="480"></video>
-                    <div class="text-white text-center flex gap-4 items-center justify-center p-4">
-                      <h1 class="font-bold uppercase text-3xl"><%= item.metadata.title %></h1>
-                      <span>-</span>
-                      <p class="text-1xl"><%= item.metadata.description %></p>
-                    </div>
                   </div>
                   <div class="absolute text-white text-4xl right-14 top-28 drop-shadow-xl cursor-pointer" onclick="detailImg('<%= item.path %>')">
                     <i class="fa-solid fa-xmark"></i>
@@ -163,9 +154,113 @@
             <% } %>
           <% }) %>
         </div>
+        <div id="detailBtn-<%= week %>" class="cursor-pointer details-week absolute bottom-0 w-full h-[6vh] bg-gradient-to-t from-neutral-800 hover:to-neutral-800/100 to-neutral-800/10 backdrop-blur-lg transition-all" onclick="seeDetail('detailBtn-<%= week %>','spy-<%= week %>')">
+          <div class="w-full h-full flex justify-center items-center gap-4">
+            <i class="fa-solid fa-angle-down"></i>
+          </div>
+        </div>
       </section>
     <% } %>
+    <div class="text-center my-20">
+      <h1 class="text-4xl text-white font-bold">- <span>That's all From Us</span> -</h1>
+    </div>
+    <footer>
+      <!--Waves Container-->
+      <div class="mt-20">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g class="parallax">
+            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(2,204,32,0.7" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(2,204,32,0.5)" />
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(2,204,32,0.3)" />
+            <use xlink:href="#gentle-wave" x="48" y="7" fill="#02cc20" />
+          </g>
+        </svg>
+      </div>
+      <!--Content starts-->
+      <div class="foot-content flex flex-col gap-4 justify-center items-center">
+        <h1 class="text-2xl">Open Source @ Clan 4 MOZILLA</h1>
+        <div id="lists-nav">
+          <ul class="flex flex-row gap-8 font-bold">
+            <li><a href="#home" class="linkspy">Home</a></li>
+            <li><a href="#aboutus" class="linkspy">About</a></li>
+            <% for (const week in media) { %>
+            <li><a href="#spy-<%= week %>" class="linkspy">Week <%= week.replace('week_', '') %></a></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+      <!--Content ends-->
+    </footer>
   </div>
+  <style>
+    .waves {
+      position: relative;
+      width: 100%;
+      height: 15vh;
+      margin-bottom: -7px;
+      /*Fix for safari gap*/
+      min-height: 100px;
+      max-height: 150px;
+    }
+  
+    .foot-content {
+      position: relative;
+      height: 20vh;
+      text-align: center;
+      background-color: #02cc20;
+    }
+  
+    /* Animation */
+  
+    .parallax>use {
+      animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+    }
+  
+    .parallax>use:nth-child(1) {
+      animation-delay: -2s;
+      animation-duration: 7s;
+    }
+  
+    .parallax>use:nth-child(2) {
+      animation-delay: -3s;
+      animation-duration: 10s;
+    }
+  
+    .parallax>use:nth-child(3) {
+      animation-delay: -4s;
+      animation-duration: 13s;
+    }
+  
+    .parallax>use:nth-child(4) {
+      animation-delay: -5s;
+      animation-duration: 20s;
+    }
+  
+    @keyframes move-forever {
+      0% {
+        transform: translate3d(-90px, 0, 0);
+      }
+  
+      100% {
+        transform: translate3d(85px, 0, 0);
+      }
+    }
+  
+    /*Shrinking for mobile*/
+    @media (max-width: 768px) {
+      .waves {
+        height: 40px;
+        min-height: 40px;
+      }
+  
+      .foot-content {
+        height: 30vh;
+      }
+    }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -283,9 +378,27 @@
       sections.forEach(section => {
         observer.observe(section);
       });
-    });    
+    });
+    function seeDetail(btnid, id){
+      const element = document.getElementById(id);
+      const btnElement = document.querySelector('#'+btnid+' div i');
+      const textElement = document.querySelector('#'+btnid+' > div');
+      if (element.classList.contains('max-h-[100vh]')){
+        element.classList.remove('max-h-[100vh]');
+      } else {
+        element.classList.add('max-h-[100vh]');
+      }
+      if (btnElement.classList.contains('fa-angle-down')) {
+        btnElement.classList.remove('fa-angle-down');
+        btnElement.classList.add('fa-angle-up');
+      } else {
+        btnElement.classList.remove('fa-angle-up');
+        btnElement.classList.add('fa-angle-down');
+      }
+    }  
   </script>
   <script>
+    const targetAll = document.querySelectorAll(".popups")
     function detailImg(imgId) {
       const target = document.getElementById("popup-"+imgId)
       const body = document.querySelector('body')
@@ -293,6 +406,27 @@
       target.classList.toggle("hidden")
       target.classList.toggle("flex")
     }
+    function closePopup() {
+      const target = document.querySelectorAll('.popups')
+      const body = document.querySelector('body')
+      for (let i = 0; i < target.length; i++) {
+        if (target[i].classList.contains('flex')) {
+          target[i].classList.remove('flex')
+          target[i].classList.add('hidden')
+        }
+      }
+      body.classList.remove('overflow-hidden')
+    }
+    window.addEventListener('click', function(event) {
+      if (event.target.classList.contains('popups')) {
+        closePopup()
+      }
+    });
+    window.addEventListener('keydown', function(event){
+      if (event.key === "Escape") {
+        closePopup()
+      }
+    })
   </script>
   <script src="scripts/dash.js"></script>
 </body>

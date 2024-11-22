@@ -53,7 +53,7 @@ html:not(:focus-within) {
 	font-size: clamp(2rem, 3vw + 1rem, 6rem);
 } */
 
-[href='#read'] {
+/* [href='#read'] {
 	position: absolute;
 	bottom: 2rem;
 	left: 50%;
@@ -63,7 +63,7 @@ html:not(:focus-within) {
 	display: grid;
 	place-items: center;
 	color: canvasText;
-}
+} */
 
 [href='#read'] svg {
 	width: 75%;

@@ -192,9 +192,9 @@ nav.main-menu li.active > a,
   @apply -translate-y-[100%] fixed w-full bg-gradient-to-b from-neutral-900 from-50% transition-all duration-500 z-50 text-white;
 }
 
-.main-nav #lists-nav {
-  
-}
+/* .main-nav #lists-nav {
+  @apply 
+} */
 
 .main-nav #lists-nav > ul {
   @apply hidden md:flex
@@ -205,7 +205,7 @@ nav.main-menu li.active > a,
 }
 
 .main-nav a {
-  @apply relative text-center py-3;
+  @apply relative text-center pb-2;
 }
 
 .main-nav a.linkspy::before {

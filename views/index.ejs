@@ -17,10 +17,10 @@
 <body>
   <nav class="main-nav">
     <div>
-      <a href="#" class="uppercase">
+      <a href="#" class="uppercase font-bold text-primary text-2xl">
         Mozilla
       </a>
-      <div id="lists-nav">
+      <div id="lists-nav" class="h-fit my-auto">
         <ul class="flex flex-row gap-8 font-bold">
           <li><a href="#home" class="linkspy">Home</a></li>
           <li><a href="#aboutus" class="linkspy">About</a></li>
@@ -35,17 +35,16 @@
   <div id="body-landing">
     <div id="home">
       <header id="header-landing">
-        <video autoplay muted loop src="/Opening CLan 4.mp4"></video> <!-- Video for the background -->
+        <video autoplay muted loop src="/HDDok.mp4"></video> <!-- Video for the background -->
         <section>
           <h1 class="absolute top-[8%] left-1/2 -translate-x-1/2 w-full">
             <!-- <span class="text-3xl ">Very Good Very Well</span> -->
-            <span class="font-bold text-8xl">CLAN 4 MOZILLA</span>
+            <span class="font-bold text-6xl">CLAN 4 MOZILLA</span>
             <span class="font-bold text-3xl text-primary">Paling Good Well</span>
           </h1>
-          <a aria-hidden="true" href="#read">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
-            </svg>
+          <a aria-hidden="true" href="#read" class="absolute bottom-[8%] left-1/2 -translate-x-1/2 flex flex-col text-center items-center gap-2 w-fit">
+            <span>Scroll Ke Bawah</span>
+            <i class="fa-solid fa-arrow-down"></i>
           </a>
         </section>
       </header>
@@ -58,15 +57,29 @@
             thread. And you can choose to use View Timelines or Scroll Timelines.
           </div> -->
           <div data-split aria-hidden="true" class="leading-snug">
-            Clan terbaik yang responsif,
+            Clan Terunik yang responsif,
             Selalu berinovatif,
-            dan Menjelajah hal-hal baru untuk dikuasai.
+            dan Saling peduli sesama.
           </div>
         </div>
       </section>
     </div>
   </div>
   <div id="body-content" class="body-content">
+    <section id="dokumenter" class="w-full bg-neutral-950 py-8 md:py-12">
+      <div class="w-full container mx-auto px-4 md:px-8 relative">
+        <div class="w-fit text-center m-auto">
+          <h3 class="text-white text-3xl font-semibold sm:text-4xl">
+            Video Dokumenter
+          </h3>
+          <p class="text-white mt-3">
+            Video Dokumenter dibuat dengan penuh hati<br>
+            dan penuh semangat
+          </p>
+        </div>
+        <video src="/HDDok.mp4" controls class="mt-8"></video>
+      </div>
+    </section>
     <section id="aboutus" class="w-full h-full spy m-auto bg-neutral-900 py-8">
       <div class="w-full container mx-auto px-4 md:px-8">
         <div class="w-fit text-center m-auto">
@@ -79,7 +92,17 @@
             untuk bersama-sama
           </p>
         </div>
-        <div class="mt-12">
+        <div class="">
+          <div class="flex flex-col gap-8 container mb-12 relative">
+            <img src="/kaFitri.png" class="max-h-[60vh] w-auto object-contain z-10" alt="">
+            <div class="absolute bottom-[7%] left-1/2 -translate-x-1/2 px-4 pt-2 pb-8 outline outline-4 outline-yellow-500 w-fit font-bold bg-cyan-900 z-10">
+              <h1 class="text-yellow-500 text-xl">Kakak Pendamping</h1>
+            </div>
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 px-8 py-4 w-fit font-bold bg-yellow-500 z-10">
+              <h1 class="text-cyan-900 text-2xl">Kak Fitriyah Mardiyanti</h1>
+            </div>
+            <div id="particles-js" class="absolute w-full h-full"></div>
+          </div>
           <ul class="grid gap-8 grid-cols-2 lg:grid-cols-3">
             <% teams.forEach(member => { %>
               <div data-aos="fade-up" data-aos-duration="1000" class="flex flex-col bg-white/10 shadow-sm shadow-white/30 rounded-xl hover:shadow-white/50 hover:shadow-lg transition" href="#">
@@ -264,6 +287,12 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="scripts/particles.js"></script>
+  <script>
+    particlesJS.load('particles-js', 'scripts/particlesjs-config.json', function() {
+      console.log('callback - particles.js config loaded');
+    });
+  </script>
   <script>
     // import gsap from 'https://cdn.skypack.dev/gsap@3.12.0'
     // import ScrollTrigger from 'https://cdn.skypack.dev/gsap@3.12.0/ScrollTrigger'
